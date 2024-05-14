@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -72,5 +75,49 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-analytics")
 
+    implementation ("com.airbnb.android:lottie-compose:6.4.0")
 
+    //viewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
+
+    implementation("androidx.compose.material:material-icons-extended:1.6.7")
+
+    //Splash Api
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.49")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    // Location library to get user's location
+    implementation("com.google.android.gms:play-services-location:21.2.0")
+
+    //Paging
+    implementation("androidx.paging:paging-runtime-ktx:3.3.0")
+    implementation("androidx.paging:paging-compose:3.3.0")
+
+    //Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    // coil for asyncImage
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+    // Gson library to convert json to object
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    //implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
+}
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
