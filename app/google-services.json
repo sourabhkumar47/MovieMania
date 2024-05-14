@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1018810059287",
+    "project_id": "watchwave-83101",
+    "storage_bucket": "watchwave-83101.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018810059287:android:aa36e2a7096bde1526aa52",
+        "android_client_info": {
+          "package_name": "uk.ac.tees.mad.w9617422"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAotJ6il7sRPzn8yhU6M95tUQKgI3Tpvc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
