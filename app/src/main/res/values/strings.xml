@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Watchwave</string>
+    <string name="hide_password">Hide\n</string>
+    <string name="show_password">show</string>
 </resources>

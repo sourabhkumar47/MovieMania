@@ -21,7 +21,7 @@ import uk.ac.tees.mad.w9617422.ui.theme.WatchwaveTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContent {
             WatchwaveTheme(darkTheme = false) {
                 val navController = rememberNavController()
