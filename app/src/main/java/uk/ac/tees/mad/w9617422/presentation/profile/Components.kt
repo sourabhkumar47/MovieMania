@@ -26,7 +26,7 @@ fun ProfileInfoCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() },
-        colors = CardDefaults.cardColors(Color.White),
+//        colors = CardDefaults.cardColors(Color.White),
 //        elevation = CardDefaults.cardElevation(0.5.dp),
     ) {
 

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Movie
+import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Upcoming
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -38,6 +39,7 @@ import uk.ac.tees.mad.w9617422.moviesList.presentation.MovieListUiEvent
 import uk.ac.tees.mad.w9617422.moviesList.presentation.MovieListViewModel
 import uk.ac.tees.mad.w9617422.moviesList.utils.Screen
 import uk.ac.tees.mad.w9617422.presentation.bookmark.BookmarkScreen
+import uk.ac.tees.mad.w9617422.presentation.profile.ProfileScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -92,9 +94,9 @@ fun HomeScreen(navController: NavHostController) {
                     )
                 }
 
-//                composable(Screen.BookmarkScreen.rout) {
-//                    BookmarkScreen()
-//                }
+                composable(Screen.ProfileScreen.rout) {
+                    ProfileScreen(navController)
+                }
             }
         }
     }
@@ -114,6 +116,9 @@ fun BottomNavigationBar(
         ), BottomItem(
             title = stringResource(R.string.upcoming),
             icon = Icons.Rounded.Upcoming
+        ), BottomItem(
+            title = stringResource(R.string.profile),
+            icon = Icons.Rounded.Person
         )
     )
 
@@ -139,6 +144,12 @@ fun BottomNavigationBar(
                             onEvent(MovieListUiEvent.Navigate)
                             bottomNavController.popBackStack()
                             bottomNavController.navigate(Screen.UpcomingMovieList.rout)
+                        }
+
+                        2 -> {
+                            onEvent(MovieListUiEvent.Navigate)
+                            bottomNavController.popBackStack()
+                            bottomNavController.navigate(Screen.ProfileScreen.rout)
                         }
                     }
                 }, icon = {

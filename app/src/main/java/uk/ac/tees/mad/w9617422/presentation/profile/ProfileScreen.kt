@@ -55,8 +55,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import uk.ac.tees.mad.w9617422.R
 import uk.ac.tees.mad.w9617422.location.LocationUtils
+import uk.ac.tees.mad.w9617422.navUtils.Screen
 
 @Composable
 fun ProfileScreen(
@@ -66,6 +69,14 @@ fun ProfileScreen(
 
     var profileImageUri by remember {
         mutableStateOf<Uri?>(null)
+    }
+
+    val firebaseAuth by remember {
+        mutableStateOf(Firebase.auth)
+    }
+
+    val currentUser by remember {
+        mutableStateOf(firebaseAuth.currentUser)
     }
 
     var location by remember { mutableStateOf<String?>(null) }
@@ -212,8 +223,12 @@ fun ProfileScreen(
 
             Button(
                 onClick = {
-                    //TODO: LOGOUT
-                    navController.navigate("login")
+                    firebaseAuth.signOut()
+                    navController.navigate(Screen.LoginScreen.route) {
+                        popUpTo(Screen.ProfileScreen.route) {
+                            inclusive = true
+                        }
+                    }
                 },
                 modifier = Modifier.fillMaxWidth(),
 //                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.colorText))
