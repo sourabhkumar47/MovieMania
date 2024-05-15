@@ -21,16 +21,17 @@ fun Navigation(navController: NavHostController) {
         }
 
         composable(
-            route = "${Screen.HomeDetailsScreen.route}/{propertyId}",
+            route = Screen.HomeDetailsScreen.route+"{movieId}",
+//            route = "${Screen.HomeDetailsScreen.route}/{movieId}",
             arguments = listOf(
-                navArgument("propertyId") {
-                    type = NavType.StringType
+                navArgument("movieId") {
+                    type = NavType.IntType
                     defaultValue = ""
                 },
             )
         ) { backStackEntry ->
             val movieId =
-                backStackEntry.arguments?.getString("propertyId") ?: ""
+                backStackEntry.arguments?.getString("movieId") ?: ""
 
             DetailScreen(navController, movieId)
         }

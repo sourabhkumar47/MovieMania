@@ -13,11 +13,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
+import uk.ac.tees.mad.w9617422.moviesList.presentation.MovieListViewModel
 import uk.ac.tees.mad.w9617422.navUtils.Navigation
 import uk.ac.tees.mad.w9617422.ui.theme.WatchwaveTheme
 
+ @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,25 +35,10 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(modifier =Modifier.padding(innerPadding)) {
                         Navigation(navController)
+//                        val movieListViewModel = hiltViewModel<MovieListViewModel>()
                     }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    WatchwaveTheme {
-        Greeting("Android")
     }
 }

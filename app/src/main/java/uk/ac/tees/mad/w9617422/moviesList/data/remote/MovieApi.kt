@@ -2,14 +2,15 @@ package uk.ac.tees.mad.w9617422.moviesList.data.remote
 
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 import uk.ac.tees.mad.w9617422.moviesList.data.remote.response.MovieListDTO
 
 interface MovieApi {
     @GET("movie/{category}")
     suspend fun getMoviesList(
         @Path("category") category: String,
-        @Path("page") page: Int,
-        @Path("api_key") apiKey: String = API_KEY
+        @Query("page") page: Int,
+        @Query("api_key") apiKey: String = API_KEY
     ): MovieListDTO
 
     companion object {

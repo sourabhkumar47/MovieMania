@@ -2,4 +2,8 @@
     <string name="app_name">Watchwave</string>
     <string name="hide_password">Hide\n</string>
     <string name="show_password">show</string>
+    <string name="popular_movies">Popular\n</string>
+    <string name="upcoming_movies">Upcoming</string>
+    <string name="popular">popular</string>
+    <string name="upcoming">upcoming</string>
 </resources>
