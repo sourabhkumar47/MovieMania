@@ -37,6 +37,7 @@ import uk.ac.tees.mad.w9617422.R
 import uk.ac.tees.mad.w9617422.moviesList.presentation.MovieListUiEvent
 import uk.ac.tees.mad.w9617422.moviesList.presentation.MovieListViewModel
 import uk.ac.tees.mad.w9617422.moviesList.utils.Screen
+import uk.ac.tees.mad.w9617422.presentation.bookmark.BookmarkScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,22 +51,22 @@ fun HomeScreen(navController: NavHostController) {
         BottomNavigationBar(
             bottomNavController = bottomNavController, onEvent = movieListViewModel::onEvent
         )
-    }, topBar = {
-        TopAppBar(
-            title = {
-                Text(
-                    text = if (movieListState.isCurrentPopularScreen)
-                        stringResource(R.string.popular_movies)
-                    else
-                        stringResource(R.string.upcoming_movies),
-                    fontSize = 20.sp
-                )
-            },
-            modifier = Modifier.shadow(2.dp),
-            colors = TopAppBarDefaults.smallTopAppBarColors(
-                MaterialTheme.colorScheme.inverseOnSurface
-            )
-        )
+//    }, topBar = {
+//        TopAppBar(
+//            title = {
+//                Text(
+//                    text = if (movieListState.isCurrentPopularScreen)
+//                        stringResource(R.string.popular_movies)
+//                    else
+//                        stringResource(R.string.upcoming_movies),
+//                    fontSize = 20.sp
+//                )
+//            },
+//            modifier = Modifier.shadow(2.dp),
+//            colors = TopAppBarDefaults.smallTopAppBarColors(
+//                MaterialTheme.colorScheme.inverseOnSurface
+//            )
+//        )
     }) {
         Box(
             modifier = Modifier
@@ -90,6 +91,10 @@ fun HomeScreen(navController: NavHostController) {
                         onEvent = movieListViewModel::onEvent
                     )
                 }
+
+//                composable(Screen.BookmarkScreen.rout) {
+//                    BookmarkScreen()
+//                }
             }
         }
     }

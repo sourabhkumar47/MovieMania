@@ -126,4 +126,44 @@ class MovieListViewModel @Inject constructor(
         }
     }
 
+    private fun getTopRatedMovieList(forceFetchFromRemote: Boolean) {
+        viewModelScope.launch {
+            _movieListState.update {
+                it.copy(isLoading = true)
+            }
+
+            movieListRepository.getMovieList(
+                forceFetchFromRemote,
+                Category.TOPRATED,
+                movieListState.value.topRatedMovieListPage
+            ).collectLatest { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        _movieListState.update {
+                            it.copy(isLoading = false)
+                        }
+                    }
+
+                    is Resource.Success -> {
+                        result.data?.let { topRatedList ->
+                            _movieListState.update {
+                                it.copy(
+                                    topRatedMovieList = movieListState.value.topRatedMovieList
+                                            + topRatedList.shuffled(),
+                                    topRatedMovieListPage = movieListState.value.topRatedMovieListPage + 1
+                                )
+                            }
+                        }
+                    }
+
+                    is Resource.Loading -> {
+                        _movieListState.update {
+                            it.copy(isLoading = result.isLoading)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

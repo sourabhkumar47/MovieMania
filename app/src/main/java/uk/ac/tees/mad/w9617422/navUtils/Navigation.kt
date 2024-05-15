@@ -6,11 +6,12 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import uk.ac.tees.mad.w9617422.presentation.SplashScreen
+import uk.ac.tees.mad.w9617422.presentation.splash.SplashScreen
 import uk.ac.tees.mad.w9617422.presentation.auth.LoginScreen
 import uk.ac.tees.mad.w9617422.presentation.auth.SignUpScreen
 import uk.ac.tees.mad.w9617422.presentation.detail.DetailsScreen
 import uk.ac.tees.mad.w9617422.presentation.home.HomeScreen
+import uk.ac.tees.mad.w9617422.presentation.profile.ProfileScreen
 
 @Composable
 fun Navigation(navController: NavHostController) {
@@ -29,13 +30,12 @@ fun Navigation(navController: NavHostController) {
                 },
             )
         ) { backStackEntry ->
-//            val movieId =
-//                backStackEntry.arguments?.getString("movieId") ?: ""
             DetailsScreen()
         }
-//        composable(Screen.ProfileScreen.route) {
-//            ProfileScreen(navController)
-//        }
+
+        composable(Screen.ProfileScreen.route) {
+            ProfileScreen(navController)
+        }
         composable(Screen.RegisterScreen.route) {
             SignUpScreen(navController)
         }
