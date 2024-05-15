@@ -94,6 +94,15 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.48")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    //coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
     // Location library to get user's location
     implementation("com.google.android.gms:play-services-location:21.2.0")
 
