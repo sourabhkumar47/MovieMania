@@ -114,14 +114,14 @@ fun ProfileScreen(
                     .padding(bottom = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = {
+//                IconButton(onClick = {
 //                    ScreenRouter.navigateTo(Screen.HomeScreen)
-                }) {
-                    Icon(
-                        Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = ""
-                    )
-                }
+//                }) {
+//                    Icon(
+//                        Icons.AutoMirrored.Filled.ArrowBack,
+//                        contentDescription = ""
+//                    )
+//                }
                 Text(
                     text = "Profile",
                     style = MaterialTheme.typography.headlineMedium,
@@ -178,12 +178,18 @@ fun ProfileScreen(
 
                     )
                 }
-                Spacer(modifier = Modifier.height(10.dp))
-//                Text(
-//                    text = userProfile.name,
-//                    style = MaterialTheme.typography.headlineMedium,
-//                    fontWeight = FontWeight.Bold,
-//                )
+                Spacer(modifier = Modifier.height(5.dp))
+                Text(
+                    text = "Alex",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                )
+                Spacer(modifier = Modifier.height(5.dp))
+                Text(
+                    text = location ?: "Loading...",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Normal,
+                )
             }
 
             Spacer(modifier = Modifier.height(10.dp))
