@@ -43,8 +43,8 @@ import coil.size.Size
 import uk.ac.tees.mad.w9617422.moviesList.data.remote.MovieApi
 import uk.ac.tees.mad.w9617422.moviesList.domain.model.Movie
 import uk.ac.tees.mad.w9617422.moviesList.utils.RatingBar
-import uk.ac.tees.mad.w9617422.moviesList.utils.Screen
 import uk.ac.tees.mad.w9617422.moviesList.utils.getAverageColor
+import uk.ac.tees.mad.w9617422.navUtils.Screen
 
 @Composable
 fun MovieItem(
@@ -78,7 +78,7 @@ fun MovieItem(
                 )
             )
             .clickable {
-                navHostController.navigate(Screen.Details.rout + "/${movie.id}")
+                navHostController.navigate(uk.ac.tees.mad.w9617422.moviesList.utils.Screen.Details.rout + "/${movie.id}")
             }
     ) {
         if (imageState is AsyncImagePainter.State.Error) {
@@ -126,7 +126,7 @@ fun MovieItem(
             maxLines = 1
         )
 
-        Row (
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, bottom = 12.dp, top = 4.dp)

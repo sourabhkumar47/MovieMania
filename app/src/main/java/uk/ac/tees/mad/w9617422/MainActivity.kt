@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
         setContent {
-            WatchwaveTheme(darkTheme = false) {
+            WatchwaveTheme() {
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
@@ -35,7 +35,6 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(modifier =Modifier.padding(innerPadding)) {
                         Navigation(navController)
-//                        val movieListViewModel = hiltViewModel<MovieListViewModel>()
                     }
                 }
             }

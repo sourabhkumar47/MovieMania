@@ -9,7 +9,7 @@ import androidx.navigation.navArgument
 import uk.ac.tees.mad.w9617422.presentation.SplashScreen
 import uk.ac.tees.mad.w9617422.presentation.auth.LoginScreen
 import uk.ac.tees.mad.w9617422.presentation.auth.SignUpScreen
-import uk.ac.tees.mad.w9617422.presentation.detail.DetailScreen
+import uk.ac.tees.mad.w9617422.presentation.detail.DetailsScreen
 import uk.ac.tees.mad.w9617422.presentation.home.HomeScreen
 
 @Composable
@@ -21,19 +21,17 @@ fun Navigation(navController: NavHostController) {
         }
 
         composable(
-            route = Screen.HomeDetailsScreen.route+"{movieId}",
-//            route = "${Screen.HomeDetailsScreen.route}/{movieId}",
+//            route = Screen.DetailsScreen.route + "{movieId}",
+            route = "${uk.ac.tees.mad.w9617422.moviesList.utils.Screen.Details.rout}/{movieId}",
             arguments = listOf(
                 navArgument("movieId") {
                     type = NavType.IntType
-                    defaultValue = ""
                 },
             )
         ) { backStackEntry ->
-            val movieId =
-                backStackEntry.arguments?.getString("movieId") ?: ""
-
-            DetailScreen(navController, movieId)
+//            val movieId =
+//                backStackEntry.arguments?.getString("movieId") ?: ""
+            DetailsScreen()
         }
 //        composable(Screen.ProfileScreen.route) {
 //            ProfileScreen(navController)
