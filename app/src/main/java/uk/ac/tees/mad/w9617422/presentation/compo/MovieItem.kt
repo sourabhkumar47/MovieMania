@@ -2,6 +2,7 @@ package uk.ac.tees.mad.w9617422.presentation.compo
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
@@ -40,6 +42,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
+import uk.ac.tees.mad.w9617422.R
 import uk.ac.tees.mad.w9617422.moviesList.data.remote.MovieApi
 import uk.ac.tees.mad.w9617422.moviesList.domain.model.Movie
 import uk.ac.tees.mad.w9617422.moviesList.utils.RatingBar
@@ -51,6 +54,11 @@ fun MovieItem(
     movie: Movie,
     navHostController: NavHostController
 ) {
+
+    var isBookmarked by remember {
+        mutableStateOf(false)
+    }
+
     val imageState = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
             .data(MovieApi.IMAGE_BASE_URL + movie.backdrop_path)
@@ -104,16 +112,38 @@ fun MovieItem(
                 imageBitmap = imageState.result.drawable.toBitmap().asImageBitmap()
             )
 
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(6.dp)
-                    .height(250.dp)
-                    .clip(RoundedCornerShape(22.dp)),
-                painter = imageState.painter,
-                contentDescription = movie.title,
-                contentScale = ContentScale.Crop
-            )
+            Box {
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(6.dp)
+                        .height(250.dp)
+                        .clip(RoundedCornerShape(22.dp)),
+                    painter = imageState.painter,
+                    contentDescription = movie.title,
+                    contentScale = ContentScale.Crop
+                )
+
+                Icon(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(16.dp)
+                        .size(24.dp)
+                        .clickable {
+                            if (isBookmarked) {
+
+                            } else {
+
+                            }
+                            isBookmarked = !isBookmarked
+
+                        },
+                    tint = if (isBookmarked) Color.Yellow else Color.White,
+                    painter = painterResource(id = R.drawable.baseline_bookmark_24),
+                    contentDescription = "bookmark"
+                )
+
+            }
         }
 
         Spacer(modifier = Modifier.height(6.dp))
