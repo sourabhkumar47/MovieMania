@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material.icons.rounded.Movie
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Upcoming
@@ -94,6 +95,10 @@ fun HomeScreen(navController: NavHostController) {
                     )
                 }
 
+                composable(Screen.BookmarkScreen.rout) {
+                    BookmarkScreen(navController)
+                }
+
                 composable(Screen.ProfileScreen.rout) {
                     ProfileScreen(navController)
                 }
@@ -116,6 +121,9 @@ fun BottomNavigationBar(
         ), BottomItem(
             title = stringResource(R.string.upcoming),
             icon = Icons.Rounded.Upcoming
+        ), BottomItem(
+            title = stringResource(R.string.bookmark),
+            icon = Icons.Rounded.Bookmark
         ), BottomItem(
             title = stringResource(R.string.profile),
             icon = Icons.Rounded.Person
@@ -147,6 +155,12 @@ fun BottomNavigationBar(
                         }
 
                         2 -> {
+                            onEvent(MovieListUiEvent.Navigate)
+                            bottomNavController.popBackStack()
+                            bottomNavController.navigate(Screen.BookmarkScreen.rout)
+                        }
+
+                        3 -> {
                             onEvent(MovieListUiEvent.Navigate)
                             bottomNavController.popBackStack()
                             bottomNavController.navigate(Screen.ProfileScreen.rout)
