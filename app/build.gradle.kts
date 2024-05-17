@@ -42,6 +42,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -78,8 +79,14 @@ dependencies {
 
     //firebase auth
     implementation("com.google.firebase:firebase-auth-ktx")
-
     implementation ("com.airbnb.android:lottie-compose:6.4.0")
+
+    //Firebase Storage
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("com.google.firebase:firebase-storage")
+
+    //Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx")
 
     //viewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
