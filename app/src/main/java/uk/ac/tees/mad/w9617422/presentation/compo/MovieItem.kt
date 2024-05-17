@@ -1,5 +1,6 @@
 package uk.ac.tees.mad.w9617422.presentation.compo
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -21,6 +22,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,6 +50,7 @@ import uk.ac.tees.mad.w9617422.moviesList.domain.model.Movie
 import uk.ac.tees.mad.w9617422.moviesList.utils.RatingBar
 import uk.ac.tees.mad.w9617422.moviesList.utils.getAverageColor
 import uk.ac.tees.mad.w9617422.navUtils.Screen
+import uk.ac.tees.mad.w9617422.presentation.bookmark.Preferences
 
 @Composable
 fun MovieItem(
@@ -55,8 +58,16 @@ fun MovieItem(
     navHostController: NavHostController
 ) {
 
+    val context = LocalContext.current
+
     var isBookmarked by remember {
         mutableStateOf(false)
+    }
+
+    LaunchedEffect(Unit) {
+        Log.d("MovieItem", "LaunchedEffect-MovieItem")
+        isBookmarked = Preferences.getPref(context)?.getStringSet("bookmarks", emptySet())
+            ?.contains(movie.id.toString()) == true
     }
 
     val imageState = rememberAsyncImagePainter(
@@ -130,13 +141,27 @@ fun MovieItem(
                         .padding(16.dp)
                         .size(24.dp)
                         .clickable {
+                            val existingSet =
+                                Preferences
+                                    .getPref(context)
+                                    ?.getStringSet("bookmarks", emptySet())
+                                    ?.toMutableSet() ?: mutableSetOf()
+                            val prefEditor = Preferences
+                                .getPref(context)
+                                ?.edit()
                             if (isBookmarked) {
-
+                                Log.d("MovieItem", "Removing bookmark")
+                                existingSet.remove(movie.id.toString())
+                                Log.d("MovieItem", "Removed ExistingSet: $existingSet")
                             } else {
-
+                                Log.d("MovieItem", "Adding bookmark")
+                                existingSet.add(movie.id.toString())
+                                Log.d("MovieItem", "Added ExistingSet: $existingSet")
                             }
+                            prefEditor
+                                ?.putStringSet("bookmarks", existingSet)
+                                ?.apply()
                             isBookmarked = !isBookmarked
-
                         },
                     tint = if (isBookmarked) Color.Yellow else Color.White,
                     painter = painterResource(id = R.drawable.baseline_bookmark_24),

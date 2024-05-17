@@ -36,6 +36,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import uk.ac.tees.mad.w9617422.R
+import uk.ac.tees.mad.w9617422.moviesList.presentation.MovieListState
 import uk.ac.tees.mad.w9617422.moviesList.presentation.MovieListUiEvent
 import uk.ac.tees.mad.w9617422.moviesList.presentation.MovieListViewModel
 import uk.ac.tees.mad.w9617422.moviesList.utils.Screen
@@ -96,7 +97,7 @@ fun HomeScreen(navController: NavHostController) {
                 }
 
                 composable(Screen.BookmarkScreen.rout) {
-                    BookmarkScreen(navController)
+                    BookmarkScreen(navController, movieListState)
                 }
 
                 composable(Screen.ProfileScreen.rout) {

@@ -3,6 +3,10 @@ package uk.ac.tees.mad.w9617422.moviesList.domain.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+data class MoviesList(
+    val movieLists: List<Movie> = emptyList()
+)
+
 data class Movie(
     val adult: Boolean,
     val backdrop_path: String,
@@ -20,3 +24,7 @@ data class Movie(
     val vote_count: Int,
     val category: String,
 )
+
+object MovieObject {
+    var movieList:MoviesList? = MoviesList()
+}
