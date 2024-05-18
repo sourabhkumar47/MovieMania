@@ -162,8 +162,8 @@ fun MovieItem(
                                 ?.apply()
                             isBookmarked = !isBookmarked
                         },
-                    tint = if (isBookmarked) Color.Yellow else Color.White,
-                    painter = painterResource(id = R.drawable.baseline_bookmark_24),
+                    tint = if (isBookmarked) Color.Red else Color.White,
+                    painter = painterResource(id = R.drawable.baseline_favorite_24),
                     contentDescription = "bookmark"
                 )
 
