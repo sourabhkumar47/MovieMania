@@ -1,9 +1,6 @@
 package uk.ac.tees.mad.w9617422.presentation.auth
 
-import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
-import android.location.Location
 import android.net.Uri
 import android.util.Patterns
 import android.widget.Toast
@@ -23,9 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Password
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
@@ -35,7 +30,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,13 +44,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -64,12 +54,9 @@ import com.google.firebase.storage.FirebaseStorage
 import uk.ac.tees.mad.w9617422.R
 import uk.ac.tees.mad.w9617422.navUtils.Screen
 import uk.ac.tees.mad.w9617422.presentation.profile.ProfileData
-import uk.ac.tees.mad.w9617422.presentation.profile.ProfileViewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Objects
-import uk.ac.tees.mad.w9617422.BuildConfig
 
 @Composable
 fun SignUpScreen(navController: NavController) {
@@ -84,10 +71,6 @@ fun SignUpScreen(navController: NavController) {
     var capturedImageUri by remember {
         mutableStateOf<Uri>(Uri.EMPTY)
     }
-
-    val profileViewModel: ProfileViewModel = viewModel()
-
-    var profileData by remember { mutableStateOf(ProfileData(name = "")) }
 
     var email by remember {
         mutableStateOf("")
@@ -120,19 +103,6 @@ fun SignUpScreen(navController: NavController) {
     var showLoader by remember {
         mutableStateOf(false)
     }
-
-    var file by remember {
-        mutableStateOf<File?>(null)
-    }
-
-//    LaunchedEffect(Unit) {
-//
-//        file = context.createImageFile()
-//        uri = FileProvider.getUriForFile(
-//            Objects.requireNonNull(context),
-//            BuildConfig.APPLICATION_ID + ".provider", file!!
-//        )
-//    }
 
     val cameraLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {

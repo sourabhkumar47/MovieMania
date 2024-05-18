@@ -23,13 +23,13 @@ fun Navigation(navController: NavHostController) {
 
         composable(
 //            route = Screen.DetailsScreen.route + "{movieId}",
-            route = "${uk.ac.tees.mad.w9617422.moviesList.utils.Screen.Details.rout}/{movieId}",
+            route = "${Screen.Details.route}/{movieId}",
             arguments = listOf(
                 navArgument("movieId") {
                     type = NavType.IntType
                 },
             )
-        ) { backStackEntry ->
+        ) {
             DetailsScreen()
         }
 

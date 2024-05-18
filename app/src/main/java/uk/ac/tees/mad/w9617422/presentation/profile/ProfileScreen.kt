@@ -87,8 +87,6 @@ fun ProfileScreen(
 ) {
     val context = LocalContext.current
 
-    val profileViewModel: ProfileViewModel = viewModel()
-
     var showLoader by remember {
         mutableStateOf(false)
     }
@@ -143,9 +141,6 @@ fun ProfileScreen(
         location = LocationUtils().getCurrentLocation(context as Activity)
     }
 
-    val bitmap = remember {
-        mutableStateOf<Bitmap?>(null)
-    }
 
 //    val launcher = rememberLauncherForActivityResult(
 //        contract = ActivityResultContracts.GetContent()

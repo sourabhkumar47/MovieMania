@@ -97,7 +97,7 @@ fun MovieItem(
                 )
             )
             .clickable {
-                navHostController.navigate(uk.ac.tees.mad.w9617422.moviesList.utils.Screen.Details.rout + "/${movie.id}")
+                navHostController.navigate(Screen.Details.route + "/${movie.id}")
             }
     ) {
         if (imageState is AsyncImagePainter.State.Error) {
