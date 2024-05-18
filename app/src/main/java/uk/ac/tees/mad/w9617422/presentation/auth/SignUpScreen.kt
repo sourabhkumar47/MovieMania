@@ -1,5 +1,6 @@
 package uk.ac.tees.mad.w9617422.presentation.auth
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.util.Patterns
@@ -44,7 +45,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.ktx.auth
@@ -87,7 +87,7 @@ fun SignUpScreen(navController: NavController) {
         mutableStateOf(FirebaseStorage.getInstance())
     }
 
-    var uri by remember {
+    val uri by remember {
         mutableStateOf<Uri?>(null)
     }
 
@@ -438,6 +438,7 @@ fun SignUpScreen(navController: NavController) {
     }
 }
 
+@SuppressLint("SimpleDateFormat")
 fun Context.createImageFile(): File {
     val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
     val imageFileName = "JPEG_" + timeStamp + "_"
