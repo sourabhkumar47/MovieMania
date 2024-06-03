@@ -1,13 +1,64 @@
 # MovieMania
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Logo](https://github.com/sourabhkumar47/MovieMania/assets/81826285/3884699e-8dae-45e6-bbd0-5a6796aa4109)
 
 Welcome to MovieMania, a cutting-edge movie application built using Kotlin and Jetpack Compose. This app leverages the TMDb API to bring you the latest and most popular movies right at your fingertips. With features such as bookmarking, profile management, and user authentication via Firebase, MovieMania provides a seamless and personalized movie-browsing experience. Explore, bookmark, and manage your favourite movies effortlessly.
 
+### ⚒️ Architecture
+
+MovieMania follows the principles of Clean Architecture.
+
+### 👨‍💻 Tech stack
+
+| Tools                 |                                     Link                                                                  |
+|:----------------------|:---------------------------------------------------------------------------------------------------------:|
+| 🤖  Language          |                       [Kotlin](https://kotlinlang.org)                                                    |
+| 💉  DI                |          [Dagger-Hilt](https://insert-koin.io/docs/reference/koin-mp/kmp/)                                |
+| 🧭  Navigation        |        [Compose Nabigation](https://github.com/Tlaster/PreCompose)                                        |
+| 🧶  Multi-threading   |     [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines)                                  |
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+#### Android
+- Dark
+<table style="width:100%">
+  <tr>
+    <th>login</th>
+    <th>Home</th>
+    <th>Home 2</th>
+    <th>Detail</th>
+    <th>Bookmark</th>
+    <th>Profile</th>
+  </tr>
+  <tr>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/e6e8b605-282e-4519-8367-4e2102d0db15" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/c819e68f-8d4e-4c79-9d06-6c69c1e6f14e" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/dcca4a2f-d89a-4c1f-9daf-dabe591b53ed" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/24186916-d677-4faa-a45b-8774a47c848f" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/eff0c0e5-8482-4d0c-a5ac-8d7c467e89fe" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/83e7dded-e975-4dba-be25-2c3519d2ecb5" width=150/></td>
+  </tr>
+</table>
+
+- Light
+<table style="width:100%">
+  <tr>
+    <th>Splash</th>
+    <th>Registration</th>
+    <th>Home</th>
+    <th>Detail</th>
+    <th>Bookmark</th>
+    <th>Profile</th>
+  </tr>
+  <tr>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/5a8fda1a-17fb-4254-8cb5-aaf692a94d92" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/78817ef5-8a7a-4b11-9006-271da43c4a41" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/9980b955-1fb8-4f2b-8010-3455a2ff9eb1" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/8651532d-8de0-4f58-ab1a-b2df9417b70f" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/d010649e-3146-4731-a53e-e2079b567fa7" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/aa4c6732-5a7f-4467-9099-4d3a59c46906" width=150/></td>
+  </tr>
+</table>
 
 **Technologies**
 - Jetpack
