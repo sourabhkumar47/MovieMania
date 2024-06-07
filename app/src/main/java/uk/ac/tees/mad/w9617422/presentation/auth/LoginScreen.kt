@@ -46,6 +46,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import uk.ac.tees.mad.w9617422.R
 import uk.ac.tees.mad.w9617422.navUtils.Screen
+import uk.ac.tees.mad.w9617422.presentation.lottie.LoadingComponent
 
 
 @Composable
@@ -89,11 +90,12 @@ fun LoginScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .width(40.dp)
-                    .height(40.dp)
-            )
+//            CircularProgressIndicator(
+//                modifier = Modifier
+//                    .width(40.dp)
+//                    .height(40.dp)
+//            )
+            LoadingComponent()
         }
 
     } else {

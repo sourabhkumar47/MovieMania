@@ -146,6 +146,9 @@ dependencies {
 
     //implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
+
+    //lottie
+    implementation ("com.airbnb.android:lottie-compose:6.4.0")
 }
 // Allow references to generated code
 kapt {

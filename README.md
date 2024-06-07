@@ -98,6 +98,9 @@ create a modular, scalable, and testable codebase.
 
 To deploy this project run
 
+ - API key is required to run this project. 
+ - You can get it from [TMDB](https://www.themoviedb.org/documentation/api)
+
  - Add API key in local.properties file as
 
 ```bash

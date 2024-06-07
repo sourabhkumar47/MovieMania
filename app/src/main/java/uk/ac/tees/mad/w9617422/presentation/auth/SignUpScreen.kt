@@ -53,6 +53,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import uk.ac.tees.mad.w9617422.R
 import uk.ac.tees.mad.w9617422.navUtils.Screen
+import uk.ac.tees.mad.w9617422.presentation.lottie.LoadingComponent
 import uk.ac.tees.mad.w9617422.presentation.profile.ProfileData
 import java.io.File
 import java.text.SimpleDateFormat
@@ -132,11 +133,12 @@ fun SignUpScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .width(40.dp)
-                    .height(40.dp)
-            )
+//            CircularProgressIndicator(
+//                modifier = Modifier
+//                    .width(40.dp)
+//                    .height(40.dp)
+//            )
+            LoadingComponent()
         }
 
     } else {
