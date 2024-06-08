@@ -51,6 +51,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -269,8 +270,8 @@ fun LoginScreen(navController: NavController) {
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Rounded.Login,
-                        contentDescription = "text",
-                        modifier = Modifier.size(18.dp),
+                        contentDescription = "Login",
+                        modifier = Modifier.size(30.dp),
                     )
                     Spacer(modifier = Modifier.width(9.dp))
                 }
@@ -293,6 +294,7 @@ fun LoginScreen(navController: NavController) {
                 ) {
                     Text(
                         text = "Doesn't have an account?",
+                        fontSize = 12.sp,
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onBackground
                     )
@@ -305,6 +307,7 @@ fun LoginScreen(navController: NavController) {
                                 navController.navigate(Screen.RegisterScreen.route)
                             },
                         text = "Register",
+                        fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary,
                         textAlign = TextAlign.Center
                     )

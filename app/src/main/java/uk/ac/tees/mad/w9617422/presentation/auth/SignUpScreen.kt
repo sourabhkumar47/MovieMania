@@ -13,22 +13,31 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Login
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Password
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.rounded.HowToReg
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,13 +46,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.ktx.auth
@@ -104,10 +117,10 @@ fun SignUpScreen(navController: NavController) {
         mutableStateOf(false)
     }
 
-    val cameraLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
-            capturedImageUri = uri!!
-        }
+//    val cameraLauncher =
+//        rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
+//            capturedImageUri = uri!!
+//        }
 
     val galleryLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri1 ->
@@ -133,9 +146,10 @@ fun SignUpScreen(navController: NavController) {
 
         Column(
             verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(vertical = 24.dp)
+                .padding(start = 25.dp, end = 25.dp)
         ) {
 
             Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
@@ -143,54 +157,30 @@ fun SignUpScreen(navController: NavController) {
                     modifier = Modifier
                         .height(200.dp)
                         .width(200.dp)
-                        .clip(CircleShape),
-                    painter = if (capturedImageUri.path?.isNotEmpty() == true)
-                        rememberAsyncImagePainter(capturedImageUri)
-                    else
-                        painterResource(id = R.drawable.ddf0110aa19f445687b737679eec9cb2),
-                    contentDescription = "Profile Image"
-                )
-
-//                Icon(
-//                    modifier = Modifier
-//                        .clickable {
-//                            val permissionCheckResult =
-//                                ContextCompat.checkSelfPermission(
-//                                    context,
-//                                    android.Manifest.permission.CAMERA
-//                                )
-//                            if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
-//                                cameraLauncher.launch(uri!!)
-//                            } else {
-//                                cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
-//                            }
-//                        }
-//                        .align(Alignment.BottomStart)
-//                        .padding(start = 20.dp, bottom = 20.dp),
-//                    painter = painterResource(id = R.drawable.baseline_camera_alt_24),
-//                    contentDescription = "Camera"
-//                )
-
-                Icon(
-                    modifier = Modifier
+                        .clip(CircleShape)
                         .clickable {
                             galleryLauncher.launch(
                                 PickVisualMediaRequest(
                                     mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
                                 )
                             )
-                        }
-                        .align(Alignment.BottomEnd)
-                        .padding(end = 20.dp, bottom = 20.dp),
-                    painter = painterResource(id = R.drawable.baseline_add_photo_alternate_24),
-                    contentDescription = "Gallery"
+                        },
+                    contentScale = ContentScale.Crop,
+                    painter = if (capturedImageUri.path?.isNotEmpty() == true)
+                        rememberAsyncImagePainter(capturedImageUri)
+                    else
+                        painterResource(id = R.drawable.ddf0110aa19f445687b737679eec9cb2),
+                    contentDescription = "Profile Image"
                 )
             }
+
+            Spacer(modifier = Modifier.height(15.dp))
 
             TextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .height(60.dp)
+                    .padding(top = 3.dp),
                 value = userName,
                 placeholder = {
                     Text(text = "Enter Username")
@@ -201,13 +191,26 @@ fun SignUpScreen(navController: NavController) {
                 },
                 onValueChange = {
                     userName = it
-                }
+                },
+                leadingIcon = {
+                    Icon(
+                        Icons.Default.Person,
+                        contentDescription = "Email"
+                    )
+                },
+                colors = TextFieldDefaults.colors(
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent
+                ),
+                shape = MaterialTheme.shapes.medium
             )
+
+            Spacer(modifier = Modifier.height(15.dp))
 
             TextField(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+                    .fillMaxWidth(),
                 value = email,
                 placeholder = {
                     Text(text = "Enter Email")
@@ -225,13 +228,20 @@ fun SignUpScreen(navController: NavController) {
                         Icons.Default.Email,
                         contentDescription = "Email"
                     )
-                }
+                },
+                colors = TextFieldDefaults.colors(
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent
+                ),
+                shape = MaterialTheme.shapes.medium
             )
+
+            Spacer(modifier = Modifier.height(15.dp))
 
             TextField(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+                    .fillMaxWidth(),
                 value = password,
                 singleLine = true,
                 leadingIcon = {
@@ -267,53 +277,26 @@ fun SignUpScreen(navController: NavController) {
                 },
                 onValueChange = {
                     password = it
-                }
+                },
+                colors = TextFieldDefaults.colors(
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent
+                ),
+                shape = MaterialTheme.shapes.medium
             )
+
+            Spacer(modifier = Modifier.height(15.dp))
 
             Button(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+                    .align(Alignment.CenterHorizontally),
+
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.secondary,
+                    contentColor = MaterialTheme.colorScheme.onSecondary
+                ),
                 onClick = {
-
-//                    if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//                        Toast.makeText(context, "Enter Valid Email", Toast.LENGTH_SHORT).show()
-//                    } else if (password.isEmpty() || password.length < 6) {
-//                        Toast.makeText(
-//                            context,
-//                            "Password should of length more than 6",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    } else if (userName.isEmpty()) {
-//                        Toast.makeText(context, "Enter Valid Username", Toast.LENGTH_SHORT)
-//                            .show()
-//                    } else if (capturedImageUri == Uri.EMPTY) {
-//                        Toast.makeText(
-//                            context,
-//                            "Please Choose Valid profile Photo",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    } else {
-//                        showLoader = true
-//                        firebaseAuth.createUserWithEmailAndPassword(email, password)
-//                            .addOnCompleteListener { task ->
-//                                if (task.isSuccessful) {
-//
-//                                    Toast.makeText(context, "User Created", Toast.LENGTH_SHORT)
-//                                        .show()
-//                                    navController.navigate(Screen.HomeScreen.route)
-//                                } else {
-//                                    Toast.makeText(
-//                                        context,
-//                                        "Error: ${task.exception?.message}",
-//                                        Toast.LENGTH_SHORT
-//                                    )
-//                                        .show()
-//                                }
-//                                showLoader = false
-//                            }
-//                    }
-
                     if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                         Toast.makeText(context, "Enter Valid Email", Toast.LENGTH_SHORT).show()
                     } else if (password.isEmpty() || password.length < 6) {
@@ -336,7 +319,6 @@ fun SignUpScreen(navController: NavController) {
                         firebaseAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener { loginTask ->
                                 if (loginTask.isSuccessful) {
-
                                     firebaseStorage.reference
                                         .child(firebaseAuth.currentUser?.uid ?: "")
                                         .putFile(capturedImageUri)
@@ -410,19 +392,55 @@ fun SignUpScreen(navController: NavController) {
                     }
                 }
             ) {
-                Text(text = "Register")
+                Row(
+                    modifier = Modifier,
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.HowToReg,
+                        contentDescription = "Register",
+                        modifier = Modifier.size(30.dp),
+                    )
+                    Spacer(modifier = Modifier.width(9.dp))
+                }
+                Text(
+                    text = "Sign Up",
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
+                )
             }
 
-            Text(
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp)
-                    .clickable {
-                        navController.popBackStack()
-                    },
-                text = "Login",
-                textAlign = TextAlign.Center
-            )
+                    .padding(top = 30.dp),
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "Already have an account?",
+                        fontSize = 12.sp,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+
+                    Spacer(modifier = Modifier.width(1.dp))
+
+                    Text(
+                        modifier = Modifier
+                            .clickable {
+                                navController.popBackStack()
+                            },
+                        text = "Login",
+                        fontSize = 17.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
 
         }
     }
