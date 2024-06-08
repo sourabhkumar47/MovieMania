@@ -25,7 +25,6 @@ import androidx.compose.material.icons.filled.Password
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -114,17 +113,6 @@ fun SignUpScreen(navController: NavController) {
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri1 ->
             capturedImageUri = uri1 ?: Uri.EMPTY
         }
-
-    val cameraPermissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) {
-        if (it) {
-            cameraLauncher.launch(uri!!)
-            Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
-        }
-    }
 
     if (showLoader) {
         Column(

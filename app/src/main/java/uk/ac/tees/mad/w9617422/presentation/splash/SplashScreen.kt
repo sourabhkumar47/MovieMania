@@ -7,6 +7,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -55,7 +56,7 @@ fun SplashScreen(navController: NavController) {
         animationSpec = tween(durationMillis = 1000), label = ""
     )
 
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.movie_lottie))
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.movie_splash))
     val progress by animateLottieCompositionAsState(composition)
 
 
@@ -73,7 +74,8 @@ fun SplashScreen(navController: NavController) {
                 .padding(16.dp)
         ) {
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
 
                 LottieAnimation(
