@@ -30,15 +30,20 @@ MovieMania follows the principles of Clean Architecture.
     <th>Bookmark</th>
     <th>Profile</th>
   </tr>
+
+
+  
   <tr>
-    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/e6e8b605-282e-4519-8367-4e2102d0db15" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/fd3f1520-73ca-443f-aa57-5cf433949da5" width=150/></td>
     <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/c819e68f-8d4e-4c79-9d06-6c69c1e6f14e" width=150/></td>
     <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/dcca4a2f-d89a-4c1f-9daf-dabe591b53ed" width=150/></td>
     <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/24186916-d677-4faa-a45b-8774a47c848f" width=150/></td>
     <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/eff0c0e5-8482-4d0c-a5ac-8d7c467e89fe" width=150/></td>
-    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/83e7dded-e975-4dba-be25-2c3519d2ecb5" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/77ce7228-51dc-4760-8208-9b90bba2a55f" width=150/></td>
   </tr>
 </table>
+
+
 
 - Light
 <table style="width:100%">
@@ -50,15 +55,19 @@ MovieMania follows the principles of Clean Architecture.
     <th>Bookmark</th>
     <th>Profile</th>
   </tr>
+
+
   <tr>
-    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/5a8fda1a-17fb-4254-8cb5-aaf692a94d92" width=150/></td>
-    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/78817ef5-8a7a-4b11-9006-271da43c4a41" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/e8f0ba5b-62b1-4bea-a272-9b0df73047a7" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/f01cc439-abda-4fbd-9df2-8984c8754bbf" width=150/></td>
     <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/9980b955-1fb8-4f2b-8010-3455a2ff9eb1" width=150/></td>
     <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/8651532d-8de0-4f58-ab1a-b2df9417b70f" width=150/></td>
     <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/d010649e-3146-4731-a53e-e2079b567fa7" width=150/></td>
-    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/aa4c6732-5a7f-4467-9099-4d3a59c46906" width=150/></td>
+    <td><img src = "https://github.com/sourabhkumar47/MovieMania/assets/81826285/373ce245-293f-400f-a003-9c954c623b45" width=150/></td>
   </tr>
 </table>
+
+
 
 **Technologies**
 - Jetpack
