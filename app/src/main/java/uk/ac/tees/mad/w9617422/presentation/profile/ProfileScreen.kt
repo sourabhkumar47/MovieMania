@@ -14,23 +14,38 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Login
+import androidx.compose.material.icons.automirrored.rounded.Logout
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.CheckCircleOutline
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Password
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -40,12 +55,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -189,36 +211,6 @@ fun ProfileScreen(
                             modifier = Modifier
                                 .height(200.dp)
                                 .width(200.dp)
-                                .clip(CircleShape),
-                            painter = if (profileImageUri != null)
-                                rememberAsyncImagePainter(profileImageUri)
-                            else
-                                painterResource(id = R.drawable.ddf0110aa19f445687b737679eec9cb2),
-                            contentDescription = "Profile Image"
-                        )
-
-//                        Icon(
-//                            modifier = Modifier
-//                                .clickable {
-//                                    val permissionCheckResult =
-//                                        ContextCompat.checkSelfPermission(
-//                                            context,
-//                                            Manifest.permission.CAMERA
-//                                        )
-//                                    if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
-//                                        cameraLauncher.launch(uri)
-//                                    } else {
-//                                        cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
-//                                    }
-//                                }
-//                                .align(Alignment.BottomStart)
-//                                .padding(start = 20.dp, bottom = 20.dp),
-//                            painter = painterResource(id = R.drawable.baseline_camera_alt_24),
-//                            contentDescription = "Camera"
-//                        )
-
-                        Icon(
-                            modifier = Modifier
                                 .clickable {
                                     galleryLauncher.launch(
                                         PickVisualMediaRequest(
@@ -226,10 +218,16 @@ fun ProfileScreen(
                                         )
                                     )
                                 }
-                                .align(Alignment.BottomEnd)
-                                .padding(end = 20.dp, bottom = 20.dp),
-                            painter = painterResource(id = R.drawable.baseline_add_photo_alternate_24),
-                            contentDescription = "Gallery"
+                                .clip(CircleShape),
+                            painter = if (profileImageUri != null)
+                                rememberAsyncImagePainter(
+                                    profileImageUri,
+                                    contentScale = ContentScale.Crop
+                                )
+                            else
+                                painterResource(id = R.drawable.ddf0110aa19f445687b737679eec9cb2),
+                            contentDescription = "Profile Image",
+                            contentScale = ContentScale.Crop
                         )
                     }
 
@@ -237,23 +235,42 @@ fun ProfileScreen(
                     TextField(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp),
+                            .padding(24.dp),
                         value = userName,
                         placeholder = {
                             Text(text = "Enter Username")
                         },
+                        singleLine = true,
                         label = {
-                            Text(text = "UserName")
+                            Text(text = "User Name")
                         },
                         onValueChange = {
                             userName = it
-                        }
+                        },
+                        leadingIcon = {
+                            Icon(
+                                Icons.Filled.Person,
+                                contentDescription = "User Name"
+                            )
+
+                        },
+                        colors = TextFieldDefaults.colors(
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            disabledIndicatorColor = Color.Transparent
+                        ),
+                        shape = MaterialTheme.shapes.medium
                     )
 
                     Button(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
+                            .align(Alignment.CenterHorizontally)
+                            .padding(top = 45.dp),
+
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.secondary,
+                            contentColor = MaterialTheme.colorScheme.onSecondary
+                        ),
                         onClick = {
 
                             showLoader = true
@@ -357,6 +374,19 @@ fun ProfileScreen(
                             }
 
                         }) {
+
+                        Row(
+                            modifier = Modifier,
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Check,
+                                contentDescription = "Save",
+                                modifier = Modifier.size(30.dp),
+                            )
+                            Spacer(modifier = Modifier.width(9.dp))
+                        }
                         Text(text = "Save")
                     }
 
@@ -371,17 +401,6 @@ fun ProfileScreen(
                     .fillMaxSize()
                     .padding(vertical = 24.dp)
             ) {
-
-//                Button(
-//                    modifier = Modifier
-//                        .padding(12.dp)
-//                        .align(Alignment.End)
-//                        .height(40.dp),
-//                    onClick = {
-//                        isEditable = true
-//                    }) {
-//                    Text(text = "Edit")
-//                }
                 IconButton(
                     onClick = { isEditable = true },
                     modifier = Modifier
@@ -389,14 +408,14 @@ fun ProfileScreen(
                         .padding(12.dp)
                         .height(40.dp)
                         .background(
-                            color = MaterialTheme.colorScheme.primary,
+                            color = MaterialTheme.colorScheme.secondary,
                             shape = CircleShape
                         )
                 ) {
                     Icon(
                         Icons.Filled.Edit,
                         contentDescription = "Edit",
-                        tint = MaterialTheme.colorScheme.onPrimary // Change the color here
+                        tint = MaterialTheme.colorScheme.onPrimary
                     )
                 }
 
@@ -407,11 +426,33 @@ fun ProfileScreen(
                         .align(Alignment.CenterHorizontally)
                         .clip(CircleShape),
                     painter = if (profileImageUri != null)
-                        rememberAsyncImagePainter(profileImageUri)
+                        rememberAsyncImagePainter(
+                            profileImageUri,
+                            contentScale = ContentScale.Crop,
+                        )
                     else
                         painterResource(id = R.drawable.ddf0110aa19f445687b737679eec9cb2),
-                    contentDescription = "Profile Image"
+                    contentDescription = "Profile Image",
+                    contentScale = ContentScale.Crop,
                 )
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .padding(top = 24.dp)
+                        .padding(horizontal = 24.dp)
+                ) {
+                    Icon(
+                        Icons.Filled.Email,
+                        contentDescription = "Email"
+                    )
+
+                    Text(
+                        modifier = Modifier.padding(start = 4.dp),
+                        text = FirebaseAuth.getInstance().currentUser?.email ?: "",
+                        fontSize = 24.sp
+                    )
+                }
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -423,6 +464,7 @@ fun ProfileScreen(
                         Icons.Filled.AccountBox,
                         contentDescription = "Account"
                     )
+
                     Text(
                         modifier = Modifier.padding(start = 4.dp),
                         text = userName,
@@ -432,8 +474,13 @@ fun ProfileScreen(
 
                 Button(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 20.dp, horizontal = 24.dp),
+                        .align(Alignment.CenterHorizontally)
+                        .padding(top = 45.dp),
+
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.secondary,
+                        contentColor = MaterialTheme.colorScheme.onSecondary
+                    ),
                     onClick = {
                         firebaseAuth.signOut()
                         navController.navigate(Screen.LoginScreen.route) {
@@ -442,6 +489,18 @@ fun ProfileScreen(
                             }
                         }
                     }) {
+                    Row(
+                        modifier = Modifier,
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Rounded.Logout,
+                            contentDescription = "Logout",
+                            modifier = Modifier.size(30.dp),
+                        )
+                        Spacer(modifier = Modifier.width(9.dp))
+                    }
                     Text(text = "Logout")
                 }
             }
