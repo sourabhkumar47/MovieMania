@@ -3,6 +3,7 @@ package uk.ac.tees.mad.w9617422.presentation.auth
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -300,97 +301,136 @@ fun SignUpScreen(navController: NavController) {
                     if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                         Toast.makeText(context, "Enter Valid Email", Toast.LENGTH_SHORT).show()
                     } else if (password.isEmpty() || password.length < 6) {
-                        Toast.makeText(
-                            context,
-                            "Password should of length more than 6",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(context, "Password should be at least 6 characters", Toast.LENGTH_SHORT).show()
                     } else if (userName.isEmpty()) {
-                        Toast.makeText(context, "Enter Valid Username", Toast.LENGTH_SHORT)
-                            .show()
-                    } else if (capturedImageUri == Uri.EMPTY) {
-                        Toast.makeText(
-                            context,
-                            "Please Choose Valid profile Photo",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(context, "Enter Valid Username", Toast.LENGTH_SHORT).show()
                     } else {
                         showLoader = true
                         firebaseAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener { loginTask ->
                                 if (loginTask.isSuccessful) {
-                                    firebaseStorage.reference
-                                        .child(firebaseAuth.currentUser?.uid ?: "")
-                                        .putFile(capturedImageUri)
-                                        .addOnCompleteListener { imageTask ->
-                                            if (imageTask.isSuccessful) {
-                                                firebaseStorage.reference.child(
-                                                    firebaseAuth.currentUser?.uid ?: ""
-                                                )
-                                                    .downloadUrl.addOnCompleteListener { downTask ->
-                                                        if (downTask.isSuccessful) {
-
-                                                            val use = ProfileData(
-                                                                userName,
-                                                                downTask.result.toString()
-                                                            )
-                                                            firebaseFireStore.collection("users")
-                                                                .document(
-                                                                    firebaseAuth.currentUser?.uid
-                                                                        ?: ""
-                                                                )
-                                                                .set(use)
-                                                                .addOnCompleteListener { finalTask ->
-                                                                    showLoader = false
-                                                                    if (finalTask.isSuccessful) {
-                                                                        navController.navigate(
-                                                                            Screen.HomeScreen.route
-                                                                        ) {
-                                                                            popUpTo(Screen.LoginScreen.route) {
-                                                                                inclusive = true
-                                                                            }
-                                                                        }
-                                                                        Toast.makeText(
-                                                                            context,
-                                                                            "Success",
-                                                                            Toast.LENGTH_SHORT
-                                                                        ).show()
-                                                                    } else {
-                                                                        firebaseAuth.signOut()
-                                                                        Toast.makeText(
-                                                                            context,
-                                                                            "Failed, Try again  here ${finalTask.exception?.message}",
-                                                                            Toast.LENGTH_SHORT
-                                                                        ).show()
-                                                                    }
-
-                                                                }
-                                                        }
-                                                    }
+                                    // Skip Firebase Storage and directly save user data
+                                    val use = ProfileData(userName, "https://as1.ftcdn.net/v2/jpg/02/43/12/34/1000_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg")
+                                    firebaseFireStore.collection("users")
+                                        .document(firebaseAuth.currentUser?.uid ?: "")
+                                        .set(use)
+                                        .addOnCompleteListener { finalTask ->
+                                            showLoader = false
+                                            if (finalTask.isSuccessful) {
+                                                navController.navigate(Screen.HomeScreen.route) {
+                                                    popUpTo(Screen.LoginScreen.route) { inclusive = true }
+                                                }
+                                                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                                             } else {
-                                                showLoader = false
                                                 firebaseAuth.signOut()
-                                                Toast.makeText(
-                                                    context,
-                                                    "Failed, Try again",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
+                                                Toast.makeText(context, "Failed, Try again", Toast.LENGTH_SHORT).show()
                                             }
-
                                         }
-
                                 } else {
                                     showLoader = false
-                                    Toast.makeText(
-                                        context,
-                                        "Failed, Try again",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    Toast.makeText(context, "Failed, Try again", Toast.LENGTH_SHORT).show()
                                 }
-
                             }
                     }
                 }
+
+                //------------ used storage so commented the code below --------------
+//                onClick = {
+//                    if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//                        Toast.makeText(context, "Enter Valid Email", Toast.LENGTH_SHORT).show()
+//                    } else if (password.isEmpty() || password.length < 6) {
+//                        Toast.makeText(
+//                            context,
+//                            "Password should of length more than 6",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    } else if (userName.isEmpty()) {
+//                        Toast.makeText(context, "Enter Valid Username", Toast.LENGTH_SHORT)
+//                            .show()
+//                    } else if (capturedImageUri == Uri.EMPTY) {
+//                        Toast.makeText(
+//                            context,
+//                            "Please Choose Valid profile Photo",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    } else {
+//                        showLoader = true
+//                        firebaseAuth.createUserWithEmailAndPassword(email, password)
+//                            .addOnCompleteListener { loginTask ->
+//                                if (loginTask.isSuccessful) {
+//                                    firebaseStorage.reference
+//                                        .child(firebaseAuth.currentUser?.uid ?: "")
+//                                        .putFile(capturedImageUri)
+//                                        .addOnCompleteListener { imageTask ->
+//                                            if (imageTask.isSuccessful) {
+//                                                firebaseStorage.reference.child(
+//                                                    firebaseAuth.currentUser?.uid ?: ""
+//                                                )
+//                                                    .downloadUrl.addOnCompleteListener { downTask ->
+//                                                        if (downTask.isSuccessful) {
+//
+//                                                            val use = ProfileData(
+//                                                                userName,
+//                                                                downTask.result.toString()
+//                                                            )
+//                                                            firebaseFireStore.collection("users")
+//                                                                .document(
+//                                                                    firebaseAuth.currentUser?.uid
+//                                                                        ?: ""
+//                                                                )
+//                                                                .set(use)
+//                                                                .addOnCompleteListener { finalTask ->
+//                                                                    showLoader = false
+//                                                                    if (finalTask.isSuccessful) {
+//                                                                        navController.navigate(
+//                                                                            Screen.HomeScreen.route
+//                                                                        ) {
+//                                                                            popUpTo(Screen.LoginScreen.route) {
+//                                                                                inclusive = true
+//                                                                            }
+//                                                                        }
+//                                                                        Toast.makeText(
+//                                                                            context,
+//                                                                            "Success",
+//                                                                            Toast.LENGTH_SHORT
+//                                                                        ).show()
+//                                                                    } else {
+//                                                                        firebaseAuth.signOut()
+//                                                                        Log.d("TAG", "Error: ${finalTask.exception?.message}")
+//                                                                        Toast.makeText(
+//                                                                            context,
+//                                                                            "Failed, Try again  here ${finalTask.exception?.message}",
+//                                                                            Toast.LENGTH_SHORT
+//                                                                        ).show()
+//                                                                    }
+//
+//                                                                }
+//                                                        }
+//                                                    }
+//                                            } else {
+//                                                showLoader = false
+//                                                firebaseAuth.signOut()
+//                                                Toast.makeText(
+//                                                    context,
+//                                                    "Failed, Try again",
+//                                                    Toast.LENGTH_SHORT
+//                                                ).show()
+//                                            }
+//
+//                                        }
+//
+//                                } else {
+//                                    showLoader = false
+//                                    Toast.makeText(
+//                                        context,
+//                                        "Failed, Try again",
+//                                        Toast.LENGTH_SHORT
+//                                    ).show()
+//                                }
+//
+//                            }
+//                    }
+//                }
             ) {
                 Row(
                     modifier = Modifier,

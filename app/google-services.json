@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1018810059287",
-    "project_id": "watchwave-83101",
-    "storage_bucket": "watchwave-83101.appspot.com"
+    "project_number": "1000943611033",
+    "project_id": "moviemania-9de39",
+    "storage_bucket": "moviemania-9de39.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1018810059287:android:aa36e2a7096bde1526aa52",
+        "mobilesdk_app_id": "1:1000943611033:android:6a062b9f8c8f031ff39c08",
         "android_client_info": {
           "package_name": "uk.ac.tees.mad.w9617422"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAotJ6il7sRPzn8yhU6M95tUQKgI3Tpvc8"
+          "current_key": "AIzaSyBOqzqV0ZS4Sg3-kf3Zq1nqtPhFigAT9zQ"
         }
       ],
       "services": {
